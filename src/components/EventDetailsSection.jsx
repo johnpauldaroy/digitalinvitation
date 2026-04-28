@@ -72,7 +72,7 @@ function EventDetailsSection({ event }) {
           >
             <div className="flex items-center gap-2">
               <detail.Icon className={`h-3 w-3 shrink-0 ${detail.accent}`} />
-              <p className={`text-xs font-semibold uppercase tracking-wide ${detail.accent}`}>{detail.label}</p>
+              <p className="text-xs font-semibold uppercase tracking-wide text-black">{detail.label}</p>
             </div>
             <p className="mt-1 text-sm font-bold text-slate-800">{event[detail.key]}</p>
           </motion.article>
