@@ -7,7 +7,7 @@ const getTimeLeft = (targetDate) => {
   }
 
   return {
-    days: Math.floor(diff / (1000 * 60 * 60 * 24)),
+    days: Math.ceil(diff / (1000 * 60 * 60 * 24)),
     hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
     minutes: Math.floor((diff / (1000 * 60)) % 60),
     seconds: Math.floor((diff / 1000) % 60),
@@ -61,4 +61,3 @@ function CountdownSection({ targetDate }) {
 }
 
 export default CountdownSection;
-
