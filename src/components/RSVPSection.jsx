@@ -85,7 +85,6 @@ function RSVPSection({ rsvp, onSuccess }) {
     <section className="rounded-[2rem] border border-white/60 bg-white/80 p-6 shadow-soft backdrop-blur-lg sm:p-10">
       <h3 className="font-heading text-3xl text-slate-800">RSVP</h3>
       <p className="mt-2 text-slate-600">{rsvp.contactLabel}</p>
-      <p className="mt-1 text-sm font-semibold text-slate-600">Contact: {rsvp.contactName} | {rsvp.contactEmail}</p>
 
       {submitted && (
         <div className="mt-4 rounded-xl border border-candy-mint/60 bg-candy-mint/25 p-3 text-sm font-semibold text-slate-700">

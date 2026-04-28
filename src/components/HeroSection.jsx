@@ -23,7 +23,7 @@ function HeroSection({ heroImage, celebrant, event }) {
             {celebrant.headline}
           </motion.h1>
           <motion.h2
-            className="mt-4 text-2xl font-bold text-candy-pink sm:text-3xl"
+            className="mt-4 text-3xl font-bold text-candy-pink sm:text-4xl"
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}

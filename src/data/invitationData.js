@@ -53,7 +53,7 @@ export const invitationData = {
     partyDateLabel: 'May 4, 2026', // [PARTY_DATE]
     partyDateISO: '2026-05-04T15:00:00+08:00',
     partyTime: '3:00 PM', // [PARTY_TIME]
-    venueName: 'Buenavista Development Cooperative Function Hall', // [VENUE_NAME]
+    venueName: 'Buenavista Development Cooperative Function Hall 2nd Floor', // [VENUE_NAME]
     venueAddress: 'Buenavista, Guimaras, Philippines', // [VENUE_ADDRESS]
     dressCode: 'Any', // Dress code
     theme: 'Pastel Rainbow',
