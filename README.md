@@ -1,70 +1,138 @@
-# Getting Started with Create React App
+# Digital Invitation - Jamiesha's 1st Birthday
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Interactive, mobile-first birthday invitation website built with React, Vite, Tailwind CSS, and Framer Motion.
 
-## Available Scripts
+## Tech Stack
 
-In the project directory, you can run:
+- React + Vite
+- Tailwind CSS
+- Framer Motion
+- canvas-confetti
+- Vitest + Testing Library
 
-### `npm start`
+## Project Structure
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```text
+src/
+  components/
+    BackgroundDecor.jsx
+    CountdownSection.jsx
+    EventDetailsSection.jsx
+    FooterSection.jsx
+    HeroSection.jsx
+    LocationSection.jsx
+    MemorySection.jsx
+    MusicToggle.jsx
+    RSVPSection.jsx
+    SurpriseMessageModal.jsx
+  data/
+    invitationData.js
+  App.jsx
+  App.test.jsx
+  index.css
+  main.jsx
+  setupTests.js
+index.html
+vite.config.mjs
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Run Locally
 
-### `npm test`
+```bash
+npm install
+npm run dev
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Open `http://localhost:5173`.
 
-### `npm run build`
+## Build
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+npm run build
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Test
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+npm test
+```
 
-### `npm run eject`
+## Where To Edit Invitation Details
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Edit all event content in:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- `src/data/invitationData.js`
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Main editable fields:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- Celebrant name, age, headline, about text
+- Party date/time and ISO countdown datetime
+- Venue name and address
+- Dress code and theme
+- RSVP contact info
+- Google Maps link
+- Music URL
+- Gallery cards and image links
 
-## Learn More
+## Notes
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- RSVP submits to a Google Apps Script webhook configured via `VITE_RSVP_WEBHOOK_URL`.
+- Confetti triggers on first load and after successful RSVP submit.
+- Music toggle supports any direct `.mp3` URL in `invitationData.js`.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Google Sheets RSVP Setup
 
-### Code Splitting
+1. Open the target Google Sheet.
+2. Go to `Extensions` > `Apps Script`.
+3. Paste this script:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```javascript
+function doPost(e) {
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheets()[0];
+  const data = e.parameter;
 
-### Analyzing the Bundle Size
+  sheet.appendRow([
+    data.guestName || '',
+    data.attendees || '',
+    data.withKids || '',
+    data.kidsCount || '',
+    data.message || '',
+    data.attendance || '',
+  ]);
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+  return ContentService.createTextOutput(JSON.stringify({ ok: true }))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+```
 
-### Making a Progressive Web App
+4. Deploy the script as a web app and copy its URL.
+5. Put that URL into `.env` as `VITE_RSVP_WEBHOOK_URL=...`.
+6. Restart the dev server after changing the env file.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Suggested sheet headers:
 
-### Advanced Configuration
+- Guest Name
+- Number of Attendees
+- With Kids
+- How Many Kids
+- Message for Celebrant
+- Will you attend?
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Future Upgrades
 
-### Deployment
+1. Connect RSVP form to Formspree, Supabase, or EmailJS.
+2. Add WhatsApp one-tap RSVP button.
+3. Add a real photo carousel with swipe gestures.
+4. Add per-section animation toggles for accessibility.
+5. Add multi-language support.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Design Variations
 
-### `npm run build` fails to minify
+1. Princess Theme:
+Use blush pink + gold accents, crown illustrations, and a castle silhouette background.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+2. Butterfly Garden Theme:
+Use mint + floral tones, leaf textures, and animated butterfly paths.
+
+3. Pastel Rainbow Theme (current):
+Use soft rainbow gradients, balloon-like shapes, and playful rounded cards.
